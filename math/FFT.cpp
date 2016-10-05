@@ -42,21 +42,32 @@ void FFT(Virt F[], int len, int on) {
 		for(int i = 0; i < len; i++)
 			F[i].r /= len;
 }
-void Conv(Virt a[], Virt b[], int len) {
-	FFT(a, len, 1);
-	FFT(b, len, 1);
-	for(int i = 0; i < len; i++)
-		a[i] = a[i] * b[i];
-	FFT(a, len, -1);
-}
-
-int result[maxn];
-int len;
-Virt va[maxn], vb[maxn];
-
-void work() {
-	Conv(va, vb, len);
+// 黑科技，FFT取膜 cov(p, q)
+void Cov(int p[], int q[], int m) {
+	int t = sqrt(MOD), len = 1;
+	while(len < 2 * m) len <<= 1;
 	for(int i = 0; i < len; i++) {
-		result[i] = va[i].r + 0.5;
+		p1[i] = (i < m ? p[i] / t : 0);
+		p2[i] = (i < m ? p[i] % t : 0);
+		p3[i] = 0;
+		q1[i] = (i < m ? q[i] / t : 0);
+		q2[i] = (i < m ? q[i] % t : 0);
+	}
+	FFT(p1, len, 1), FFT(p2, len, 1), FFT(q1, len, 1), FFT(q2, len, 1);
+	for(int i = 0; i < len; i++) {
+		p3[i] = p1[i] * q2[i] + p2[i] * q1[i];
+		p1[i] = p1[i] * q1[i];
+		p2[i] = p2[i] * q2[i];
+	}
+	FFT(p1, len, -1), FFT(p2, len, -1), FFT(p3, len, -1);
+	for(int i = 0; i < len; i++) {
+		ll t1 = p1[i].r + 0.5;
+		ll t2 = p2[i].r + 0.5;
+		ll t3 = p3[i].r + 0.5;
+		p[i] = (t1 * t * t + t * t3 + t2) % MOD;
+	}
+	for(int i = m; i < len; i++) {
+		p[i%m] = (p[i%m] + p[i]) % MOD;
+		p[i] = 0;
 	}
 }
