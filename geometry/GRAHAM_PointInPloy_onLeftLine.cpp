@@ -2,12 +2,12 @@ int Gh(Point *p, int tot) {
 	sort(p, p + tot);
 	int n = 0;
 	for(int i = 0; i < tot; i++) {
-		while(n > 1 && ((ploy[n-1] - ploy[n-2]) ^ (p[i] - ploy[n-1])) >= 0) n--;
+		while(n > 1 && ((ploy[n-1] - ploy[n-2]) ^ (p[i] - ploy[n-1])) <= 0) n--;
 		ploy[n++] = p[i];
 	}
 	int m = n;
 	for(int i = tot - 2; ~i; i--) {
-		while(m > n && ((ploy[m-1] - ploy[m-2]) ^ (p[i] - ploy[m-1])) >= 0) m--;
+		while(m > n && ((ploy[m-1] - ploy[m-2]) ^ (p[i] - ploy[m-1])) <= 0) m--;
 		ploy[m++] = p[i];
 	}
 	return m - 1;

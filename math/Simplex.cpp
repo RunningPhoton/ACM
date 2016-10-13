@@ -1,9 +1,9 @@
 // UVa10498 Happiness!
 // Rujia Liu
-#include<cstdio>
-#include<cstring>
-#include<algorithm>
-#include<cassert>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+#include <cassert>
 using namespace std;
 
 // 改进单纯性法的实现

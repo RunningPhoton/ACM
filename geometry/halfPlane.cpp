@@ -1,22 +1,8 @@
 //最后点放在p[m]
+// 半平面交
+p[maxn];
 int m;
 inline bool zero(double a) {return abs(a) < eps;}
-struct Point {
-    double x, y;
-    Point (double _x = 0, double _y = 0) : x(_x), y(_y) {}
-    Point operator+ (Point rhs) {
-        return Point(x + rhs.x, y + rhs.y);
-    }
-    Point operator- (Point rhs) {
-        return Point(x - rhs.x, y - rhs.y);
-    }
-    double operator* (Point rhs) {
-        return x * rhs.x + y * rhs.y;
-    }
-    double operator^ (Point rhs) {
-        return x * rhs.y - y * rhs.x;
-    }
-}p[maxn*2];
 struct Segment {
     Point s, e;
     double angle;

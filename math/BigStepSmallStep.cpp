@@ -1,3 +1,5 @@
+
+// 大步小步算法
 struct Node {
 	ll x, y;
 };

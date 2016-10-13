@@ -5,15 +5,12 @@ struct Graph {
 	struct Edge {
 		int to, next;
 	} edge[maxm];
-
 	int head[maxn], ecnt;
-
 	void add(int u, int v) {
 		edge[ecnt].to = v;
 		edge[ecnt].next = head[u];
 		head[u] = ecnt++;
 	}
-
 	void init() {
 		ecnt = 0; 
 		memset(head, -1, sizeof head);
